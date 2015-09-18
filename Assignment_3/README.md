@@ -29,3 +29,8 @@ if Dist1 > Dist2:
 else:
 	return 10 * (1.4*Dist1 + (Dist2-Dist1))
 ```
+
+#Motivation
+>The idea behind this heuristic is to get a more straight shot to the goal as opposed to going as far in the x direction as you can and then as far in the y direction as you can
+>
+>I thought this would be a good method because as I said, it's more of a straight shot to the goal you want to reach.
