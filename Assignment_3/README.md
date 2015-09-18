@@ -19,3 +19,13 @@ if(xDist > yDist){
 ```
 
 >So then I rewrote that in python to fit my program
+
+```python
+def diagonal(self, current, next):
+Dist1 = abs(current[0] - next[0])
+Dist2 = abs(current[1] - next[1])
+if Dist1 > Dist2:
+	return 10 * (1.4*Dist2 + (Dist1-Dist2))
+else:
+	return 10 * (1.4*Dist1 + (Dist2-Dist1))
+```
