@@ -19,7 +19,8 @@ class Graph():
 
 	def manhattan(self, current, next):
 		return 10 * (abs(current[0] - next[0]) + abs(current[1] - next[1]))
-	
+
+#idea for this heuristic came from http://rocketmandevelopment.com/blog/a-heuristics/	
 	def diagonal(self, current, next):
 		Dist1 = abs(current[0] - next[0])
 		Dist2 = abs(current[1] - next[1])
