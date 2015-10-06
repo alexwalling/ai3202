@@ -41,9 +41,7 @@ class Graph:
 					reward = 50
 				self.nodes.append(Node(x, y, wall, reward))
 		self.start = self.getNode(0, 0)
-		print "start" , self.start.printNode()
 		self.end = self.getNode(self.width - 1, self.height - 1)
-		print "end" , self.end.printNode()
 
 	def getNode(self, x, y):
 		print ""
@@ -54,3 +52,5 @@ class Graph:
 		print "hello"
 		for i in range(0, self.width * self.height):
 			print self.nodes[i].printNode()
+
+	
