@@ -110,18 +110,16 @@ class Graph:
 
 	def path(self):
 		self.adjacentNode(self.start)
-		pathu = []
-		node = self.end
-		pathu.append(node)
-		while node.parent is not self.start:
-			node = node.parent
-			pathu.append(node)
+		path = []
+		tempnode = self.end
+		pathu.append(tempnode)
+		while tempnode.parent is not self.start:
+			tempnode = tempnode.parent
+			path.append(tempnode)
 		pathu.append(self.start)	
-		print 'start: (x,y)'
-		for s in reversed(pathl):
-			print '(%d,%d), utility: %0.2f' % (s.x, s.y, s.utility)
+		for n in reversed(path):
+			n.printNode()
 
-		print 'finish'
 
 	def adjacentNode(self, node):
 		adj = []
