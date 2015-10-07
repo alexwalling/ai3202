@@ -122,24 +122,26 @@ class Graph:
 
 
 	def adjacentNode(self, node):
-		adj = []
+		adjUtility = []
 		adjNode = []
+		returnNodes = []
 		node.printNode()
 		if node.x < self.width-1 and node.wall is False:
-			adj.append(self.getNode(node.x + 1, node.y).utility)
+			adjUtility.append(self.getNode(node.x + 1, node.y).utility)
 			adjNode.append(self.getNode(node.x + 1, node.y))	
-		if node.y < self.height-1 and node.wall is False:
-			adj.append(self.getNode(node.x, node.y + 1).utility)
-			adjNode.append(self.getNode(node.x, node.y + 1))
 		if node.x > 0 and node.wall is False:
-			adj.append(self.getNode(node.x - 1, node.y).utility)
+			adjUtility.append(self.getNode(node.x - 1, node.y).utility)
 			adjNode.append(self.getNode(node.x - 1, node.y))
+		if node.y < self.height - 1 and node.wall is False:
+			adjUtility.append(self.getNode(node.x, node.y + 1).utility)
+			adjNode.append(self.getNode(node.x, node.y + 1))
 		if node.y > 0 and node.wall is False:
-			adj.append(self.getNode(node.x, node.y - 1).utility)
+			adjUtility.append(self.getNode(node.x, node.y - 1).utility)
 			adjNode.append(self.getNode(node.x, node.y - 1))
-		
+
 		if node is not self.end:
+			for i in adj
+				returnNodes.append(adjancentNode(i))
+			
 			adjNode[adj.index(max(adj))].parent = node
-			for i in self.nodes:
-				i.printNode()
 			self.adjacentNode(adjNode[adj.index(max(adj))])
