@@ -14,6 +14,9 @@ parsedWorld = parseFile(worldFile)
 
 a = Graph(len(parsedWorld) - 1, len(parsedWorld[0]))
 a.MDP(parsedWorld)
+a.valueIteration(float(.5))
+a.path()
+
 
 a.printNodes()
 
