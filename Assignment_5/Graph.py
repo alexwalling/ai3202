@@ -101,7 +101,7 @@ class Graph:
 				actionvalue.append(temp)
 		return actionvalue
 
-	def valueIteration(self, epsilon = .5):
+	def valueIteration(self, epsilon):
 		gamma = self.gamma
 		delta = float('Inf')
 		while delta > epsilon*(1 - gamma)/gamma:
@@ -122,9 +122,10 @@ class Graph:
 			tempnode = tempnode.parent
 			p.append(tempnode)
 		p.append(self.start)	
+		print "Printing Path"
 		for n in reversed(p):
 			#n.printNode()
-			print n.x, n.y, n.utility
+			print "x:", n.x, "y:", n.y
 
 	def adjacentNode(self, node):
 		adjUtility = []

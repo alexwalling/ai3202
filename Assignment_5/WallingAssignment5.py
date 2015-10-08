@@ -15,10 +15,15 @@ parsedWorld = parseFile(worldFile)
 
 parsedWorld.reverse()
 
+print "Enter epsilon value: "
+epsilon = raw_input()
+if isinstance(epsilon, str):
+	epsilon = .5
+
 a = Graph(len(parsedWorld), len(parsedWorld[0]))
 #print parsedWorld
 a.MDP(parsedWorld)
-a.valueIteration(float(.5))
+a.valueIteration(float(epsilon))
 a.path()
 
 
