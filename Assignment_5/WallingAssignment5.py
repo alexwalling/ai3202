@@ -4,7 +4,8 @@ from Graph import Graph
 def parseFile(fileDescriptor):
 	parsed = []
 	for line in fileDescriptor:
-		parsed.append(line.rstrip('\n').split(' '))
+		#parsed.append(line.rstrip('\n').split(' '))
+		parsed.append([elt.strip() for elt in line.split()])
 	return parsed
 
 fileName = "World1MDP.txt"
@@ -12,13 +13,16 @@ fileName = "World1MDP.txt"
 worldFile = open(fileName, 'r')
 parsedWorld = parseFile(worldFile)
 
-a = Graph(len(parsedWorld) - 1, len(parsedWorld[0]))
+parsedWorld.reverse()
+
+a = Graph(len(parsedWorld), len(parsedWorld[0]))
+#print parsedWorld
 a.MDP(parsedWorld)
 a.valueIteration(float(.5))
 a.path()
 
 
-a.printNodes()
+#a.printNodes()
 
 worldFile.close()
 

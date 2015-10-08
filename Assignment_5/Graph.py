@@ -20,35 +20,40 @@ class Graph:
 		self.gamma = gamma
 
 	def MDP(self, graph):
-		for y in range(self.height):
-			for x in range(self.width):
+		reward = 0
+		for y in range(len(graph)):
+			for x in range(len(graph[0])):
 				wall = False
-				print("x: ", x)
-				print ("y: ", y)
-				print ("Value: ", graph[y][x])
-				if graph[self.height - 1 - y][x] is '0':		#empty space
+				#print("x: ", x)
+				#print ("y: ", y)
+				#print ("Value: ", graph[y][x])
+				if graph[y][x] is '0':		#empty space
 					reward = 0
-				if graph[self.height - 1 - y][x] is '1':		#mountain
+				if graph[y][x] is '1':		#mountain
 					reward = -1
-				if graph[self.height - 1 - y][x] is '2':		#wall
+				if graph[y][x] is '2':		#wall
 					wall = True
 					reward = 0
-				if graph[self.height - 1 - y][x] is '3':		#snake
+				if graph[y][x] is '3':		#snake
 					reward = -2
-				if graph[self.height - 1 - y][x] is '4':		#barn
+				if graph[y][x] is '4':		#barn
 					reward = 1
 				if x == self.width - 1 and y == self.height - 1:	#end state
 					reward = 50
 				self.nodes.append(Node(x, y, wall, reward))
 		self.start = self.getNode(0, 0)
-		self.end = self.getNode(self.width - 1, self.height - 1)
+		self.end = self.getNode(len(graph[0]) - 1, len(graph) - 1)
 
 	def getNode(self, x, y):
-		print "start print"
+		#print "start print"
 		#for i in self.nodes:
-			#i.printNode()
+		#	i.printNode()
+		#print len(self.nodes)
 		#print "x:",x,"y:" , y
-		return self.nodes[y * self.height + x]
+		#print y * self.width + x
+		#print self.width
+		#print self.height
+		return self.nodes[y * self.width + x]
 
 	def printNodes(self):
 		print "hello"
@@ -78,9 +83,9 @@ class Graph:
 				actionvalue.append(temp)
 			if self.actions[i] is 'up':
 				temp = 0
-				if y + 1 <= self.height:
+				if y + 1 <= self.height - 1:
 					temp = .8 * self.getNode(x, y + 1).utility
-				if x + 1 <= self.width:
+				if x + 1 <= self.width - 1:
 					temp = .1 * self.getNode(x + 1, y).utility + temp
 				if x - 1 >= 0:
 					temp = .1 * self.getNode(x - 1, y).utility + temp
@@ -89,7 +94,7 @@ class Graph:
 				temp = 0
 				if y - 1 >= 0:
 					temp = .8 * self.getNode(x, y - 1).utility
-				if x + 1 <= self.width:
+				if x + 1 <= self.width - 1:
 					temp = .1 * self.getNode(x + 1, y).utility + temp
 				if x - 1 >= 0:
 					temp = .1 * self.getNode(x - 1, y).utility + temp
@@ -100,48 +105,43 @@ class Graph:
 		gamma = self.gamma
 		delta = float('Inf')
 		while delta > epsilon*(1 - gamma)/gamma:
-			for s in self.nodes:
-				if s.wall is False:
-					currentUtility = s.utility
-				#	print s.x , " " , s.y
-					print max(self.transition(s.x, s.y))
-					s.utility = s.reward + gamma*max(self.transition(s.x, s.y))
-					delta = abs(currentUtility - s.utility)
+			for n in reversed(self.nodes):
+				if n.wall is False:
+					currentUtility = n.utility
+				#	print n.x , " " , n.y
+				#	print max(self.transition(n.x, n.y))
+					n.utility = n.reward + gamma*max(self.transition(n.x, n.y))
+					delta = abs(currentUtility - n.utility)
 
 	def path(self):
 		self.adjacentNode(self.start)
-		path = []
+		p = []
 		tempnode = self.end
-		pathu.append(tempnode)
+		p.append(tempnode)
 		while tempnode.parent is not self.start:
 			tempnode = tempnode.parent
-			path.append(tempnode)
-		pathu.append(self.start)	
-		for n in reversed(path):
-			n.printNode()
-
+			p.append(tempnode)
+		p.append(self.start)	
+		for n in reversed(p):
+			#n.printNode()
+			print n.x, n.y, n.utility
 
 	def adjacentNode(self, node):
 		adjUtility = []
 		adjNode = []
-		returnNodes = []
-		node.printNode()
-		if node.x < self.width-1 and node.wall is False:
+		if node.x < self.width-1:
 			adjUtility.append(self.getNode(node.x + 1, node.y).utility)
 			adjNode.append(self.getNode(node.x + 1, node.y))	
-		if node.x > 0 and node.wall is False:
+		if node.x > 0:
 			adjUtility.append(self.getNode(node.x - 1, node.y).utility)
 			adjNode.append(self.getNode(node.x - 1, node.y))
-		if node.y < self.height - 1 and node.wall is False:
+		if node.y < self.height - 1:
 			adjUtility.append(self.getNode(node.x, node.y + 1).utility)
 			adjNode.append(self.getNode(node.x, node.y + 1))
-		if node.y > 0 and node.wall is False:
+		if node.y > 0:
 			adjUtility.append(self.getNode(node.x, node.y - 1).utility)
 			adjNode.append(self.getNode(node.x, node.y - 1))
 
 		if node is not self.end:
-			for i in adj
-				returnNodes.append(adjancentNode(i))
-			
-			adjNode[adj.index(max(adj))].parent = node
-			self.adjacentNode(adjNode[adj.index(max(adj))])
+			adjNode[adjUtility.index(max(adjUtility))].parent = node
+			self.adjacentNode(adjNode[adjUtility.index(max(adjUtility))])
