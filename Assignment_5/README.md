@@ -1,6 +1,5 @@
-##Assignment 3 CSCI 3202
-MDP Value iteration
+##Hashmap implementation
+KPCB fellows challenge problem for application.  Implements a fixed fixed-size hash map that associates string keys with arbitrary data object references
 
 ##Run
->python WallingAssignment3.py
->enter epsilon value or leave blank to use .5
+>node hashtable.js
