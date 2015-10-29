@@ -1,5 +1,6 @@
 ##Bayes Network
 
+```
 ##marginal examples
 python cli.py -mD --- 0.304
 python cli.py -mS --- 0.3
@@ -14,3 +15,4 @@ python cli.py -g"C|C" --- 1
 python cli.py -jPSC 
 python cli.py -jpsc
 python cli.py -j~p~s~c
+```
