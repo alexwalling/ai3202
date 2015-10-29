@@ -1,6 +1,6 @@
 #Bayes Network
 ```
-python WallingAssignment6.py <args>
+python WallingAssignment6.py -<args>
 ```
 
 ##Marginal examples
