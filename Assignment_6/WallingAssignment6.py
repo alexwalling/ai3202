@@ -53,8 +53,42 @@ def conditional(graph, x, y):
 
 	return None	
 
-def joint():
-	pass
+def parseJoint(args):
+	parsed = []
+	arg_len = len(args)
+	next_has_tilde = False
+	for i in range(0,arg_len):
+		if args[i] is "~":
+			next_has_tilde = True
+		else:
+			if next_has_tilde:
+				parsed.append("~"+args[i])
+				next_has_tilde = False
+			else:
+				parsed.append(args[i])
+	return parsed
+
+def joint(graph, args):
+	pollution = graph["Pollution"].getConditional()
+	smoker = graph["Smoker"].getConditional()
+	cancer = graph["Cancer"].getConditional()
+
+	if "P" in vars and "S" in vars and "C" in vars:
+		print "P(P,S,C) " + str(cancer["ps"] * pollution["p"] * smoker["s"])
+		print "P(P,S,~C) " + str(cancer["p~s"] * pollution["p"] * (1 - smoker["s"]))
+		print "P(~P,~S,C) " + str(cancer["~ps"] * (1 - pollution["p"]) * smoker["s"])
+		print "P(~P,~S,C) " + str(cancer["~p~s"] * (1 - pollution["p"]) * (1 - smoker["s"]))
+
+		print "P(P,S,~C) " + str((1-cancer["ps"]) * pollution["p"] * smoker["s"])
+		print "P(P,~S,~C) " + str((1-cancer["p~s"]) * pollution["p"] * (1 - smoker["s"]))
+		print "P(~P,S,~C) " + str((1-cancer["~ps"]) * (1 - pollution["p"]) * smoker["s"])
+		print "P(~P,~S,~C) " + str((1-cancer["~p~s"]) * (1 - pollution["p"]) * (1 - smoker["s"]))
+
+	elif "p" in vars and "s" in vars and "c" in vars:
+		print "P(P,S,C) " + str(cancer["ps"] * pollution["p"] * smoker["s"])
+
+	elif "~p" in vars and "~s" in vars and "~c" in vars:
+		print "P(~P,~S,~C) " + str((1-cancer["~p~s"]) * (1 - pollution["p"]) * (1 - smoker["s"]))
 
 if __name__ == "__main__":
 	network = {}
@@ -107,6 +141,7 @@ if __name__ == "__main__":
 			(var, given) = a.split('|')
 			conditional(network, var, given)
 		elif o in ("-j"):
-			joint(network, a)
+			parsed = parseJoint(a)
+			joint(neteork, parsed_args)
 		else:
 			assert False, "unhandled option"
