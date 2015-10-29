@@ -48,10 +48,15 @@ def conditional(graph, x, y):
 	if x is y:
 		return 1
 	else:#TODO
-		graph[y].setConditional(y, 1)
-		return calc_marginal(graph, x)
-
-	return None	
+		q = ""
+		if y is "C":
+			q = "cancer"
+		elif y is "d":
+			q = "Dysnoea"
+		elif y is "S":
+			q = "Smoker"
+		graph[q].setConditionals(q, 1)
+		return marginal(graph, x)
 
 def parseJoint(args):
 	parsed = []
@@ -139,7 +144,7 @@ if __name__ == "__main__":
 			print(marginal(network, a))
 		elif o in ("-g"):
 			(var, given) = a.split('|')
-			conditional(network, var, given)
+			print conditional(network, var, given)
 		elif o in ("-j"):
 			parsed = parseJoint(a)
 			joint(network, parsed)
