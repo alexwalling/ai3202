@@ -73,7 +73,7 @@ def joint(graph, args):
 	smoker = graph["Smoker"].getConditional()
 	cancer = graph["Cancer"].getConditional()
 
-	if "P" in vars and "S" in vars and "C" in vars:
+	if "P" in args and "S" in args and "C" in args:
 		print "P(P,S,C) " + str(cancer["ps"] * pollution["p"] * smoker["s"])
 		print "P(P,S,~C) " + str(cancer["p~s"] * pollution["p"] * (1 - smoker["s"]))
 		print "P(~P,~S,C) " + str(cancer["~ps"] * (1 - pollution["p"]) * smoker["s"])
@@ -84,10 +84,10 @@ def joint(graph, args):
 		print "P(~P,S,~C) " + str((1-cancer["~ps"]) * (1 - pollution["p"]) * smoker["s"])
 		print "P(~P,~S,~C) " + str((1-cancer["~p~s"]) * (1 - pollution["p"]) * (1 - smoker["s"]))
 
-	elif "p" in vars and "s" in vars and "c" in vars:
+	elif "p" in args and "s" in args and "c" in args:
 		print "P(P,S,C) " + str(cancer["ps"] * pollution["p"] * smoker["s"])
 
-	elif "~p" in vars and "~s" in vars and "~c" in vars:
+	elif "~p" in args and "~s" in args and "~c" in args:
 		print "P(~P,~S,~C) " + str((1-cancer["~p~s"]) * (1 - pollution["p"]) * (1 - smoker["s"]))
 
 if __name__ == "__main__":
@@ -142,6 +142,6 @@ if __name__ == "__main__":
 			conditional(network, var, given)
 		elif o in ("-j"):
 			parsed = parseJoint(a)
-			joint(neteork, parsed_args)
+			joint(network, parsed)
 		else:
 			assert False, "unhandled option"
