@@ -40,17 +40,17 @@ rb = False
 while (i < len(probability)):
 	if (probability[i] < 0.5):	#c
 		c += 1
-		if (probability[i + 1] < 0.1):	#s|c
+		if (probability[i + 1] < 0.1):	#r|c
 			sc += 1
 			sb = True
-		if (probability[i + 2] < 0.8):	#r|c
+		if (probability[i + 2] < 0.8):	#s|c
 			rc += 1
 			rb = True
 	else:
-		if (probability[i + 1] < 0.5):	#s|~c
+		if (probability[i + 1] < 0.5):	#r|~c
 			snc += 1
 			sb = True
-		if (probability[i + 2] < 0.2):	#r|~c
+		if (probability[i + 2] < 0.2):	#s|~c
 			rnc += 1
 			rb = True
 	if sb and rb:	
@@ -99,11 +99,5 @@ def cTrueGivenRTrue(lis):
 	#return num/denom
 	return rc/(rc+rnc)
 
-def sGivenWTrue(lis):
-	swtrue = wsr + wsnr
-	wtrue = wsr + wsnr + wnsr + wnsnr
-	return swtrue / wtrue
-
 print cTrue(probability)
 print cTrueGivenRTrue(probability)
-print sGivenWTrue(probability)
