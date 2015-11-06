@@ -233,12 +233,49 @@ def sGivenCTrueWTrue():
 		i += 3				
 	return sCW / (len(sample)/4)	
 
+def cExact():
+	C = .50
+	return C
+	
+def cGivenRTrueExact():
+	numerator = (0.8)*(0.5)
+	denominator = (.5)*(.8)+(.5)*(.2)
+	exact = numerator / denominator
+	return exact	
+	
+def sGivenWTrueExact():
+	s = (.5)*.1 + (.5)*.5
+	r = (.5)*.8 + (.5)*.2
+	sr = s*r
+	sNotR = s*(1-r)
+	rNotS = (1-s)*r
+	denom = .99*sr+.9*sNotR+.9*rNotS
+	num = .99*sr+.9*sNotR
+	return num/denom
+		
+	
+def sGivenCTrueWTrueExact():
+	sC = .1
+	rC = .8
+	sr = sC*rC
+	sNotR = sC*(1-rC)
+	rNotS = (1-sC)*(rC)
+	denom = .99*sr+.9*sNotR+.9*rNotS
+	num = .99*sr+.9*sNotR
+	return num/denom
+
+
 
 
 print ("1a) %.2f" % cTrue())
 print ("1b) %.2f" % cTrueGivenRTrue())
 print ("1c) %.2f" % sGivenWTrue())
 print ("1d) %.2f" % sGivenCTrueWTrue())
+print ('-------------------------------------')
+print ("2a) %.2f" % cExact())
+print ("2b) %.2f" % cGivenRTrueExact())
+print ("2c) %.2f" % sGivenWTrueExact())
+print ("2d) %.2f" % sGivenCTrueWTrueExact())
 print ('-------------------------------------')
 print ("3a) %.2f" % cReject())
 print ("3b) %.12f" % cGivenRTrueReject())
