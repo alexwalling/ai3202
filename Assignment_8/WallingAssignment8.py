@@ -1,5 +1,6 @@
 import sys
 
+#comment out sys.stdout = open("output.txt", "w") if you want command line output
 sys.stdout = open("output.txt", "w")
 letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','_']
 
@@ -70,6 +71,6 @@ def transition(file):
 			print 'P(%s|%s)  = %.5f' %(evidenceKey, stateKey, prob)
 
 
-#marginal('typos20.data')
-#emission('typos20.data')
+marginal('typos20.data')
+emission('typos20.data')
 transition('typos20.data')
