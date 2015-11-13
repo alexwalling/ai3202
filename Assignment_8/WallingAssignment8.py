@@ -34,7 +34,7 @@ def emission(file):
 	for letter in letters:
 		evidence = {}
 		for letter2 in letters:
-			evidence[letter2] = 1
+			evidence[letter2] = 1  #smoothing
 		count[letter] = evidence
 
 	f = open(file, 'r')
@@ -53,7 +53,7 @@ def transition(file):
 	for letter in letters:
 		evidence = {}
 		for letter2 in letters:
-			evidence[letter2] = 1
+			evidence[letter2] = 1 #smoothing
 		count[letter] = evidence
 
 	f = open(file, 'r')
